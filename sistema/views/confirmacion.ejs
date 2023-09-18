@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Confirmación de Matrícula</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #2e2e2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container-matriculas {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s;
+            color: white;
+        }
+
+        .matriculas-heading {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .matricula-details {
+            margin-bottom: 20px;
+        }
+
+        .matricula-total {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-matriculas mt-5">
+        <h1 class="matriculas-heading">Confirmación de Matrícula</h1>
+        <hr>
+
+        <div class="matricula-details">
+            <h3>Detalle de la matrícula</h3>
+            <p><strong>Curso:</strong> <%= curso %></p>
+            <p><strong>Módulos seleccionados:</strong></p>
+            <ul>
+                <% if (modulos && modulos.length > 0) { %>
+                    <% for (let i = 0; i < modulos.length; i++) { %>
+                        <li><%= modulos[i] %></li>
+                    <% } %>
+                <% } else { %>
+                    <li>No se seleccionaron módulos</li>
+                <% } %>
+            </ul>
+            <p><strong>Medio de Pago:</strong> <%= medioPago %></p>
+        </div>
+
+        <div class="matricula-details">
+            <h3>Total a pagar</h3>
+            <% let total = 0; %>
+            <% for (let i = 0; i < modulos.length; i++) { %>
+                <% if (curso === 'Java') { total += 1200; } %>
+                <% if (curso === 'PHP') { total += 800; } %>
+                <% if (curso === '.NET') { total += 1500; } %>
+            <% } %>
+            <% if (medioPago === 'Pago en efectivo') { total *= 0.9; } %>
+            <p class="matricula-total">Total: S/ <%= total.toFixed(2) %></p>
+        </div>
+    </div>
+</body>
+
+</html>
